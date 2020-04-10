@@ -1,0 +1,147 @@
+{%load static%}
+<!-- Header Area Start -->
+    <header class="header-area">
+        <!-- Main Header Start -->
+        <div class="main-header-area">
+            <div class="classy-nav-container breakpoint-off">
+                <div class="container">
+                    <!-- Classy Menu -->
+                    <nav class="classy-navbar justify-content-between" id="alimeNav">
+
+                        <!-- Logo -->
+                        <a class="nav-brand" href="./index.html"><img src="{% static './img/core-img/logo2.png' %}" alt=""></a>
+                        <!-- Navbar Toggler -->
+                        <div class="classy-navbar-toggler">
+                            <span class="navbarToggler"><span></span><span></span><span></span></span>
+                        </div>
+
+                        <!-- Menu -->
+                        <div class="classy-menu">
+                            <!-- Menu Close Button -->
+                            <div class="classycloseIcon">
+                                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                            </div>
+                            <!-- Nav Start -->
+                            <div class="classynav">
+                                <ul id="nav">
+                                    {% if page == 'home'%}
+                                    <li class="active"><a href="/">Anasayfa</a></li>
+                                    {%else%}
+                                    <li ><a href="/">Anasayfa</a></li>
+                                    {%endif%}
+
+                                    {% if page == 'hakkimizda'%}
+                                    <li class="active"><a href="/hakkimizda">Hakkımızda</a></li>
+                                    {%else%}
+                                    <li ><a href="/hakkimizda">Hakkımızda</a></li>
+                                    {%endif%}
+                                    <!--<li><a href="#">Pages</a>
+                                        <ul class="dropdown">
+                                            <li><a href="./index.html">- Home</a>
+                                                <ul class="dropdown">
+                                                    <li><a href="#">- Dropdown Item</a></li>
+                                                    <li><a href="#">- Dropdown Item</a></li>
+                                                    <li><a href="#">- Dropdown Item</a></li>
+                                                    <li><a href="#">- Dropdown Item</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="./about.html">- About</a>
+                                                <ul class="dropdown">
+                                                    <li><a href="#">- Dropdown Item</a></li>
+                                                    <li><a href="#">- Dropdown Item</a></li>
+                                                    <li><a href="#">- Dropdown Item</a></li>
+                                                    <li><a href="#">- Dropdown Item</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="./gallery.html">- Gallery</a>
+                                                <ul class="dropdown">
+                                                    <li><a href="#">- Dropdown Item</a></li>
+                                                    <li><a href="#">- Dropdown Item</a></li>
+                                                    <li><a href="#">- Dropdown Item</a></li>
+                                                    <li><a href="#">- Dropdown Item</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="./blog.html">- Blog</a>
+                                                <ul class="dropdown">
+                                                    <li><a href="#">- Dropdown Item</a></li>
+                                                    <li><a href="#">- Dropdown Item</a></li>
+                                                    <li><a href="#">- Dropdown Item</a></li>
+                                                    <li><a href="#">- Dropdown Item</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="./single-blog.html">- Blog Details</a>
+                                                <ul class="dropdown">
+                                                    <li><a href="#">- Dropdown Item</a></li>
+                                                    <li><a href="#">- Dropdown Item</a></li>
+                                                    <li><a href="#">- Dropdown Item</a></li>
+                                                    <li><a href="#">- Dropdown Item</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="./contact.html">- Contact</a>
+                                                <ul class="dropdown">
+                                                    <li><a href="#">- Dropdown Item</a></li>
+                                                    <li><a href="#">- Dropdown Item</a></li>
+                                                    <li><a href="#">- Dropdown Item</a></li>
+                                                    <li><a href="#">- Dropdown Item</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="#">- Dropdown</a>
+                                                <ul class="dropdown">
+                                                    <li><a href="#">- Dropdown Item</a></li>
+                                                    <li><a href="#">- Dropdown Item</a></li>
+                                                    <li><a href="#">- Dropdown Item</a></li>
+                                                    <li><a href="#">- Dropdown Item</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>-->
+                                    {% if page == 'gallery'%}
+                                        <li ><a href="/gallery">Gallery</a></li>
+                                    {%else%}
+                                    <li ><a href="/gallery">Gallery</a>
+                                    {%endif%}
+                                        <ul class="dropdown">
+                                            <li><a href="#">- Dropdown Item</a></li>
+                                            <li><a href="#">- Dropdown Item</a></li>
+                                            <li><a href="#">- Dropdown Item</a></li>
+                                            <li><a href="#">- Dropdown Item</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href=".">Kategori</a>
+                                        <ul class="dropdown">
+                                            <li><a href="#">- All</a></li>
+                                            <li><a href ="#">- Human</a></li>
+                                            <li><a href="#">- Nature</a></li>
+                                            <li><a href="#">- Country</a></li>
+                                            <li><a href="#">- Video</a></li>
+                                        </ul>
+                                    </li>
+                                    {% if page == 'iletisim'%}
+                                    <li class="active"><a href="/iletisim">İletişim</a></li>
+                                    {%else%}
+                                    <li><a href="/iletisim">İletişim</a></li>
+                                    {%endif%}
+
+                                    {% if page == 'blog'%}
+                                    <li class="active"><a href="/blog">Blog</a></li>
+                                    {%else%}
+                                    <li><a href="/blog">Blog</a></li>
+                                    {%endif%}
+
+                                    {% if page == 'referanslarimiz'%}
+                                    <li class="active"><a href="/referanslarimiz">Referanslarımız</a></li>
+                                    {%else%}
+                                    <li><a href="/referanslarimiz">Referanslar</a></li>
+                                    {%endif%}
+                                </ul>
+                                <!-- Search Icon -->
+                                <div class="search-icon" data-toggle="modal" data-target="#searchModal"><i class="ti-search"></i></div>
+                            </div>
+                            <!-- Nav End -->
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Header Area End -->
