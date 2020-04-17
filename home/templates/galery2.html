@@ -1,0 +1,195 @@
+{%load static%}
+<!-- Gallery Area Start -->
+<style>
+    .nav {
+      width: 250px;
+    }
+    .anamenu, .altmenu {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      top:0;
+    }
+    .anamenu a{
+      display: block;
+      background-color:gray;
+      text-decoration: none;
+      padding: 10px;
+      color: #fff;
+    }
+    .anamenu a:hover {
+        background-color:#7f8c8d;
+        color:#000000;
+        font-size:22px;
+    }
+    .anamenu li:hover .altmenu {
+      display: block;
+      max-height: 200px;
+    }
+    .altmenu a{
+      background-color:black;
+    }
+    .altmenu a:hover {
+      background-color:#7f8c8d;
+    }
+    .altmenu {
+    .altmenu {
+      overflow: hidden;
+      max-height:0;
+      -webkit-transition: all 0.5s ease-out;
+    }
+        .column {
+          float: left;
+          width: 25%;
+          padding: 10px;
+        }
+
+        /* Style the images inside the grid */
+        .column img {
+          opacity: 0.8;
+          cursor: pointer;
+        }
+
+        .column img:hover {
+          opacity: 1;
+        }
+
+        /* Clear floats after the columns */
+        .row:after {
+          content: "";
+          display: table;
+          clear: both;
+        }
+
+        /* The expanding image container (positioning is needed to position the close button and the text) */
+        .container {
+          position: relative;
+          display: none;
+        }
+
+        /* Expanding image text */
+        #imgtext {
+          position: absolute;
+          bottom: 15px;
+          left: 15px;
+          color: white;
+          font-size: 20px;
+        }
+
+        /* Closable button inside the image */
+        .closebtn {
+          position: absolute;
+          top: 10px;
+          right: 15px;
+          color: white;
+          font-size: 35px;
+          cursor: pointer;
+        }
+</style>
+
+    <div class="alime-portfolio-area section-padding-80 clearfix " >
+        <div class="container-fluid">
+            <div class="row " style="margin-bottom:250px;">
+                <div class="col-2 mr-50">
+                    <!-- Projects Menu -->
+                    <div class="alime-projects-menu" >
+                        <div class="portfolio-menu text-center">
+                            {% load mptt_tags %}
+                            <nav class="nav">
+                                <h2 >Kategori Menü</h2>
+                                <ul class="anamenu">
+                                    {% recursetree category %}
+                                    <li><a href ="/categories/{{node.id}}/{{node.slug}}">{{node.title}}</a>
+                                        {% if not node.is_leaf_node %}
+                                        <ul class="altmenu" >
+                                            <li><a href ="/categories/{{node.id}}/{{node.slug}}"> {{children}}</a></li>
+                                        </ul>
+                                        {%endif%}
+                                    </li>
+                                    {%endrecursetree%}
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+                <div class="row alime-portfolio col-9 ml-50 ">
+                    <div class="container mb-50">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="section-heading text-center">
+                                    <h2 style="text-align:left;">Deals Of The Day</h2>
+                                    <div style="width: 100%; height: 3px; background-color: orange; "></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" >
+                            <div class="col-12" >
+                                <!-- Single Gallery Item -->
+                                <div class="row alime-portfolio" >
+                                    {% for rs in dayphoto %}
+                                    <div class="col-12 col-sm-4 col-lg-4 single_gallery_item video country mb-30 wow fadeInUp" style="text-align:center;;" data-wow-delay="100ms">
+                                        <a href ="/product/{{rs.id}}/{{rs.slug}}" style="font-weight:800; font-size:14px; ">{{rs.title}}</a>
+                                        <div class="single-portfolio-content ml-15 mr-15" style="color:#fc0060;font-size:14px; width:250px;height:150px;" >
+                                            <img src="{{rs.image.url}}" alt="{{rs.description}}">
+                                            <div class="hover-content">
+                                               <a href="{{rs.image.url}}" class="portfolio-img"> + </a>
+                                            </div>
+                                            <a style="font-weight:800;">{{rs.title}}</a>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="section-heading text-center">
+                                    <h2 style="text-align:left;">Lastest Photo </h2>
+                                    <div style="width: 100%; height: 3px; background-color: orange; "></div>
+                                </div>
+                            </div>
+                            <div class="col-12" >
+                        <!-- Single Gallery Item -->
+                                <div class="row alime-portfolio" >
+                                    {% for rs in lastphotos%}
+                                    <div class="col-12 col-sm-4 col-lg-4 single_gallery_item video country mb-30 wow fadeInUp" style="text-align:center;;" data-wow-delay="100ms">
+                                        <a href ="/product/{{rs.id}}/{{rs.slug}}" style="font-weight:800; font-size:14px; ">{{rs.title}}</a>
+                                        <div class="single-portfolio-content ml-15 mr-15" style="color:#fc0060;font-size:14px; width:250px;height:150px;" >
+                                            <img src="{{rs.image.url}}" alt="{{rs.description}}">
+                                            <div class="hover-content">
+                                               <a href="{{rs.image.url}}" class="portfolio-img"> + </a>
+                                            </div>
+                                            <a style="font-weight:800;">{{rs.title}}</a>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                                <div class="col-12">
+                                    <div class="section-heading text-center">
+                                        <h2 style="text-align:left;">Picked For You</h2>
+                                        <div style="width: 100%; height: 3px; background-color: orange; "></div>
+                                    </div>
+                                </div>
+                        </div>
+                        <div class="col-12" >
+                        <!-- Single Gallery Item -->
+                            <div class="row alime-portfolio" >
+                                {% for rs in randomphotos %}
+                                <div class="col-12 col-sm-4 col-lg-4 single_gallery_item video country mb-30 wow fadeInUp" style="text-align:center;;" data-wow-delay="100ms">
+                                    <a href ="/product/{{rs.id}}/{{rs.slug}}" style="font-weight:800; font-size:14px; ">{{rs.title}}</a>
+                                    <div class="single-portfolio-content ml-15 mr-15" style="color:#fc0060;font-size:14px; width:250px;height:150px;" >
+                                        <img src="{{rs.image.url}}" alt="{{rs.description}}">
+                                        <div class="hover-content">
+                                            <a href="{{rs.image.url}}" class="portfolio-img"> + </a>
+                                        </div>
+                                        <a style="font-weight:800;">{{rs.title}}</a>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+

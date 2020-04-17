@@ -226,6 +226,9 @@ input:required {
 .mr-100 {
   margin-right: 100px; }
 
+.mr-80 {
+  margin-right: 80px; }
+
 .mb-10 {
   margin-bottom: 10px; }
 
@@ -261,6 +264,9 @@ input:required {
 
 .ml-50 {
   margin-left: 50px; }
+
+.ml-80 {
+  margin-left: 80px; }
 
 .ml-100 {
   margin-left: 100px; }
@@ -421,9 +427,9 @@ input:required {
   position: relative;
   z-index: 1;
   min-width: 160px;
-  height: 46px;
+  height: 80px;
   line-height: 42px;
-  font-size: 16px;
+  font-size: 85px;
   font-weight: 500;
   display: inline-block;
   padding: 0 30px;
@@ -438,12 +444,19 @@ input:required {
   transition-duration: 500ms; }
   .alime-btn.btn-2 {
     color: #252525; }
+  .alime-btn.btn {
+    font-size:50px;
+    border:5px;
+    mergin-top:100px;
+    mergin-bottom:100px;
+    background-color:#fc6060; }
   .alime-btn:focus, .alime-btn:hover {
     font-weight: 500;
     -webkit-box-shadow: 0 2px 40px 8px rgba(15, 15, 15, 0.15);
     box-shadow: 0 2px 40px 8px rgba(15, 15, 15, 0.15);
     background-color: #fc6060;
     color: #ffffff; }
+
 
 .badges-btn {
   background-color: #ebebeb;
@@ -1523,25 +1536,44 @@ input:required {
         padding-left: 5%; } }
 
 .alime-projects-menu {
+  border: 5;
   position: relative;
   z-index: 1;
   margin-bottom: 40px; }
   .alime-projects-menu .portfolio-menu .btn {
     position: relative;
     z-index: 1;
-    padding: 0;
-    border: 0;
+    padding: 1;
+    border: 5;
     background-color: transparent;
-    font-size: 20px;
-    font-weight: 600;
+    font-size: 18px;
+    font-weight: 800;
     border-radius: 0;
     margin: 0 25px;
     -webkit-transition-duration: 500ms;
     -o-transition-duration: 500ms;
     transition-duration: 500ms; }
+
+    .alime-projects-area .ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        width: 200px;
+        background-color: #e67e22;
+    }
+    .alime-projects-area .ul .li a {
+        display: block;
+        color: #000;
+        padding: 8px 16px;
+        text-decoration: none;
+    }
+    .alime-projects-area .ul a:hover {
+        background-color: #d35400;
+        color: white;
+    }
     @media only screen and (max-width: 767px) {
       .alime-projects-menu .portfolio-menu .btn {
-        font-size: 14px;
+        font-size: 25px;
         margin: 0 5px; } }
     .alime-projects-menu .portfolio-menu .btn::after {
       -webkit-transition-duration: 500ms;
@@ -1968,4 +2000,28 @@ input:required {
     background-color: rgba(0, 0, 0, 0.7);
     z-index: 99;
   }
+}
+
+#button {position: relative;
+    z-index: 1;
+    min-width: 160px;
+    height: 80px;
+    line-height: 42px;
+    font-size: 20px;
+    font-weight: 500;
+    display: inline-block;
+    padding: 0 30px;
+    text-align: center;
+    text-transform: capitalize;
+    background-color: transparent;
+    color: #000000;
+    border: 5px solid #000000;
+    margin-bottom:20px;
+    margin-top:20px;
+     .button:focus, .button:hover {
+    font-weight: 500;
+    -webkit-box-shadow: 0 2px 40px 8px rgba(15, 15, 15, 0.15);
+    box-shadow: 0 2px 40px 8px rgba(15, 15, 15, 0.15);
+    background-color: #fc6060;
+    color: #ffffff; }
 }
