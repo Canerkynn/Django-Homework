@@ -700,8 +700,6 @@ input:required {
   width: 100%;
   height: 880px;
   background-color: #fc6060; }
-  .slider-1{background-image: url(img/bg-img/1.jpg);}
-  .slider-2{background-image: url(img/bg-img/2.jpg);}
   @media only screen and (min-width: 992px) and (max-width: 1199px) {
     .single-welcome-slide {
       height: 750px; } }

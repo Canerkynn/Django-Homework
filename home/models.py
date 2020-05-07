@@ -1,12 +1,14 @@
 from ckeditor_uploader.fields import RichTextUploadingField
+from django.contrib.auth.models import User
 from django.db import models
 
 # Create your models here.
 from django.forms import ModelForm, TextInput, Textarea
+from django.utils.safestring import mark_safe
 
 
 class Setting(models.Model) :
-    STATUS = (
+    STATUS = (  # seçim yapılması için
         ('True', 'Evet'),
         ('False','Hayır'),
     )
@@ -22,23 +24,23 @@ class Setting(models.Model) :
     smtpemail = models.CharField(blank=True,max_length=20)
     smtppassword = models.CharField(blank=True,max_length=10)
     smtpport = models.CharField(blank=True,max_length=5)
-    icon = models.ImageField(blank=True,upload_to='images/')
+    icon = models.ImageField(blank=True,upload_to='images/') # imageler nereye yüklensin ?
     facebook = models.CharField(max_length=50)
     instagram = models.CharField(max_length=50)
     twitter = models.CharField(max_length=50)
-    aboutus = RichTextUploadingField()
+    aboutus = RichTextUploadingField() # bunu yazmak için ckeditor yükledik ve import ettik.
     contact = RichTextUploadingField()
     references = RichTextUploadingField()
     status = models.CharField(max_length=10,choices=STATUS)
-    create_at = models.DateTimeField(auto_now_add=True)
+    create_at = models.DateTimeField(auto_now_add=True) # zamanları alıp ne zaman oluşturulduğunu biliyoruz.
     update_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.title
+        return self.title  # admin sitesinde göstereceği
 
 
 class ContactFormMessage(models.Model):
-    STATUS = (
+    STATUS = ( # Mesaj new, read, cloased olarak ayrılsın diye.
         ('New','New'),
         ('Read','Read'),
         ('Closed', 'Closed'),
@@ -56,7 +58,8 @@ class ContactFormMessage(models.Model):
     def __str__(self):
         return self.name
 
-class ContactFormu(ModelForm):
+class ContactFormu(ModelForm): # burada iletişim.py da oluşturulan sitenin mesaj gönderme kısmının nasıl olacağı
+                               # temeli yazılmıştır.
     class Meta:
         model =ContactFormMessage
         fields = ['name','email','subject','message']
@@ -65,5 +68,29 @@ class ContactFormu(ModelForm):
             'subject' : TextInput(attrs={'class': 'form-control','placeholder':'Subject'}),
             'email' : TextInput(attrs={'class': 'form-control','placeholder':'Email Address'}),
             'message' : Textarea(attrs={'class': 'form-control','placeholder':'Your Message' }),
-
         }
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    phone = models.CharField(blank= True, max_length=20)
+    address = models.CharField(blank= True, max_length=20)
+    city = models.CharField(blank= True, max_length=20)
+    country = models.CharField(blank= True, max_length=20)
+    image = models.ImageField(blank= True, upload_to='images/users/')
+    
+
+    def __str__(self):
+        return self.user.username
+
+    def user_name(self):
+        return '['+self.user.username+']' + '  ' + self.user.first_name+ '  '+ self.user.last_name
+
+    def image_tag(self):
+        return mark_safe('<img src ="{}" height="50"/>'.format(self.image.url))
+    image_tag.short_description = 'Image'
+
+class UserProfileForm(ModelForm):  # burada iletişim.py da oluşturulan sitenin mesaj gönderme kısmının nasıl olacağı
+# temeli yazılmıştır.
+    class Meta:
+        model = UserProfile
+        fields = ['phone', 'address', 'city', 'country','image']

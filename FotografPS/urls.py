@@ -18,7 +18,9 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
+import Human
 from home import views
+from Human.views import addcomment
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,11 +28,19 @@ urlpatterns = [
     path('',include('home.urls')),
     path('human/',include('Human.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
+    path('user/',include('user.urls')),
+
     path('hakkimizda/', views.hakkimizda, name='hakkimizda'),
     path('iletisim/', views.iletisim, name='iletisim'),
     path('referanslarimiz/', views.referanslarimiz, name='referanslarimiz'),
     path('categories/<int:id>/<slug:slug>/',views.category_products,name='category_products'),
     path('product/<int:id>/<slug:slug>/',views.product_detail,name='product_detail'),
+    path('search/',views.product_search,name='product_search'),
+    path('search_auto/',views.product_search_auto,name='product_search_auto'),
+    path('logout/', views.logout_view, name='logout_view'),
+    path('login/', views.login_view, name='login_view'),
+    path('signup/', views.signup_view, name='signup_view'),
+
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

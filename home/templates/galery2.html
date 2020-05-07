@@ -1,95 +1,103 @@
 {%load static%}
 <!-- Gallery Area Start -->
 <style>
-    .nav {
-      width: 250px;
-    }
-    .anamenu, .altmenu {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      top:0;
-    }
-    .anamenu a{
-      display: block;
-      background-color:gray;
-      text-decoration: none;
-      padding: 10px;
-      color: #fff;
-    }
-    .anamenu a:hover {
-        background-color:#7f8c8d;
-        color:#000000;
-        font-size:22px;
-    }
-    .anamenu li:hover .altmenu {
-      display: block;
-      max-height: 200px;
-    }
-    .altmenu a{
-      background-color:black;
-    }
-    .altmenu a:hover {
-      background-color:#7f8c8d;
-    }
-    .altmenu {
-    .altmenu {
-      overflow: hidden;
-      max-height:0;
-      -webkit-transition: all 0.5s ease-out;
-    }
-        .column {
-          float: left;
-          width: 25%;
-          padding: 10px;
-        }
+.nav {
+  width: 250px;
+}
 
-        /* Style the images inside the grid */
-        .column img {
-          opacity: 0.8;
-          cursor: pointer;
-        }
+.anamenu, .altmenu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  top:0;
+}
 
-        .column img:hover {
-          opacity: 1;
-        }
+.anamenu a{
+  display: block;
+  background-color:gray;
+  text-decoration: none;
+  padding: 10px;
+  color: #fff;
+}
 
-        /* Clear floats after the columns */
-        .row:after {
-          content: "";
-          display: table;
-          clear: both;
-        }
+.anamenu a:hover {
+    background-color:#7f8c8d;
+    color:#000000;
+    font-size:22px;
+}
 
-        /* The expanding image container (positioning is needed to position the close button and the text) */
-        .container {
-          position: relative;
-          display: none;
-        }
 
-        /* Expanding image text */
-        #imgtext {
-          position: absolute;
-          bottom: 15px;
-          left: 15px;
-          color: white;
-          font-size: 20px;
-        }
+.anamenu li:hover .altmenu {
+  display: block;
+  max-height:200px;
+}
 
-        /* Closable button inside the image */
-        .closebtn {
-          position: absolute;
-          top: 10px;
-          right: 15px;
-          color: white;
-          font-size: 35px;
-          cursor: pointer;
-        }
+.altmenu a{
+  background-color:#000;
+}
+
+.altmenu a:hover {
+  background-color:#7f8c8d;
+}
+
+.altmenu {
+  overflow: hidden;
+  max-height: 0;
+  -webkit-transition: all 0.5s ease-out;
+}
 </style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<!-- jQuery UI !-->
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 
-    <div class="alime-portfolio-area section-padding-80 clearfix " >
+
+<script>
+  $(function() {
+    $("#query").autocomplete({
+      source: "/search_auto/",
+      select: function (event, ui) { //item selected
+        AutoCompleteSelectHandler(event, ui)
+      },
+      minLength: 2,
+    });
+  });
+  function AutoCompleteSelectHandler(event, ui)
+  {
+    var selectedObj = ui.item;
+  }
+</script>
+    <!-- Top Search Form Area -->
+    <div class="alime-portfolio-area section-padding-80 clearfix "  style="margin-bottom:20%;">
         <div class="container-fluid">
-            <div class="row " style="margin-bottom:250px;">
+            <div class="row" style="margin-bottom:5%; background-color:orange; border-radius:20px;">
+                <div class="col-3" style="margin-left:40%;  margin-bottom:1%;">
+                    <h4>Arama Yap </h4>
+                </div>
+                 <div class="col-9" style="margin-left:14%;" >
+                  <!-- Form -->
+                    <form action="/search/" method="POST" >
+                        {% csrf_token %}
+                        <input type="search" name="query" id="query" class="form-control" placeholder="Search and hit enter..." style="margin-bottom:5%;">
+                         {% load mptt_tags %}
+                        <select name="catid" id="catid" class="col-9" >
+                            <option value="0">All categories</option>
+                            {% recursetree category %}
+                                {% if node.is_leaf_node %}
+                                    <option value="{{node.id}}">{{node.title}}</option>
+                                {%endif%}
+                                {% if not node.is_leaf_node %}
+                                    <optgroup label="{{node.title}}">
+                                        {{children}}
+                                    </optgroup>
+                                {%endif%}
+                            {%endrecursetree%}
+                        </select>
+                        <button style="float:right; margin-top:1%;">Search</button>
+                    </form>
+                 </div>
+            </div>
+            <div class="row">
                 <div class="col-2 mr-50">
                     <!-- Projects Menu -->
                     <div class="alime-projects-menu" >

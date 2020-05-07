@@ -1,4 +1,14 @@
 {%load static%}
+<style>
+    .form{
+        float:right;
+    }
+    deneme{
+        color:red;
+    }
+
+
+</style>
 <!-- Header Area Start -->
     <header class="header-area">
         <!-- Main Header Start -->
@@ -61,12 +71,32 @@
                                     {%else%}
                                     <li><a href="/referanslarimiz">Referanslar</a></li>
                                     {%endif%}
-                                </ul>
+
                                 <!-- Search Icon -->
-                                <div class="search-icon" data-toggle="modal" data-target="#searchModal"><i class="ti-search"></i></div>
+                                    <li>
+                                        {% if user.id is not None %}
+                                        <a class="ti-user" style="font-size:18px; color:white;"> {{user.username}}</a>
+                                                <ul class="dropdown">
+                                                    <li><a href ="#"> My Account</a></li>
+                                                    <li><a href="#"> My Wishlist</a></li>
+                                                    <li><a href="#"> My Liked</a></li>
+                                                    <li><a href="#"> My Comments</a></li>
+                                                    <li><a href="/logout/"> Logout</a></li>
+                                                </ul>
+                                        {% else %}
+                                        <a class="ti-user"> My Account</a>
+                                            <ul class="dropdown">
+                                                <li><a href ="/login/"> Login</a></li>
+                                                <li><a href="/signup/"> Join</a></li>
+                                                <li><a href="#"> Create An Account</a></li>
+                                            </ul>
+                                        {% endif %}
+
+                                    </li>
+                                </ul>
                             </div>
-                            <!-- Nav End -->
                         </div>
+                            <!-- Nav End -->
                     </nav>
                 </div>
             </div>

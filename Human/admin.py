@@ -3,7 +3,8 @@ from django.contrib import admin
 # Register your models here.
 from mptt.admin import MPTTModelAdmin, DraggableMPTTAdmin
 
-from Human.models import Categories, Product, Images
+from Human.models import Categories, Product, Images, Comment
+
 
 class ProductImageInline(admin.TabularInline):
     model = Images
@@ -16,9 +17,10 @@ class CategoriesAdmin(admin.ModelAdmin):
 
 class ProductAdmin(admin.ModelAdmin):
     list_display = ['title', 'status','category','cating_tag','image_tag']
-    readonly_fields = ('image_tag','cating_tag')
+    readonly_fields = ('image_tag','cating_tag',)
     list_filter = ['status']
     inlines = [ProductImageInline]
+    prepopulated_fields = {'slug': ('title',)}
 
 class ImagesAdmin(admin.ModelAdmin):
     list_display = ['title', 'image', 'image_tag']
@@ -29,6 +31,7 @@ class CategoryAdmin2(DraggableMPTTAdmin):
     list_display = ('tree_actions', 'indented_title',
                     'related_products_count', 'related_products_cumulative_count')
     list_display_links = ('indented_title',)
+    prepopulated_fields = {'slug': ('title',)}
 
     def get_queryset(self, request):
         qs = super().get_queryset(request)
@@ -57,6 +60,11 @@ class CategoryAdmin2(DraggableMPTTAdmin):
         return instance.products_cumulative_count
     related_products_cumulative_count.short_description = 'Related products (in tree)'
 
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ['subject','comment', 'product','user','status']
+    list_filter = ['status']
+
 admin.site.register(Categories,CategoryAdmin2)
 admin.site.register(Product,ProductAdmin)
 admin.site.register(Images,ImagesAdmin)
+admin.site.register(Comment,CommentAdmin)
