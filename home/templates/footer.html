@@ -1,42 +1,43 @@
 {%load static%}
 <!-- Footer Area Start -->
-    <footer class="footer-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="footer-content d-flex align-items-center justify-content-between">
-                        <!-- Footer Logo -->
-                        <div class="footer-logo">
-                            <a href="#"><img src="{% static 'img/core-img/logo2.png' %}" alt=""></a>
-                        </div>
-                        <!-- Social Info -->
-                        <div class="social-info">
-                            <a href="#"><i class="ti-facebook" aria-hidden="true"></i></a>
-                            <a href="#"><i class="ti-twitter-alt" aria-hidden="true"></i></a>
-                            <a href="#"><i class="ti-linkedin" aria-hidden="true"></i></a>
-                            <a href="#"><i class="ti-pinterest" aria-hidden="true"></i></a>
-                        </div>
+<footer class="footer-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="footer-content d-flex align-items-center justify-content-between">
+                    <!-- Footer Logo -->
+                    <div class="footer-logo">
+                        <a href="#"><img src="{% static 'img/core-img/logo2.png' %}" alt=""></a>
+                    </div>
+                    <!-- Social Info -->
+                    <h4> {{setting.company}}   </h4>
+                    <div class="social-info">
+                        <a href="https://facebook.com/{{setting.facebook}}"><i class="ti-facebook" aria-hidden="true"></i></a>
+                        <a href="https://twitter.com/{{setting.twitter}}}"><i class="ti-twitter-alt" aria-hidden="true"></i></a>
+                        <a href="https://linkedin.com/{{setting.linkedin}}"><i class="ti-linkedin" aria-hidden="true"></i></a>
+                        <a href="https://instagram.com/{{setting.instagram}}"><i class="ti-instagram" aria-hidden="true"></i></a>
                     </div>
                 </div>
             </div>
         </div>
-    </footer>
-    <!-- Footer Area End -->
+    </div>
+</footer>
+<!-- Footer Area End -->
 
-    <!-- **** All JS Files ***** -->
-    <!-- jQuery 2.2.4 -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-    <!-- Popper -->
-    <script src="{% static 'js/popper.min.js' %}"></script>
-    <!-- Bootstrap -->
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
-    <!-- All Plugins -->
-    <script src="{% static 'js/alime.bundle.js' %}"></script>
-    <!-- Active -->
-    <script src="{% static 'js/default-assets/active.js' %}"></script>
-    <!-- jQuery !-->
-    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"> </script>-->
-    <!-- jQuery UI !-->
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+<!-- **** All JS Files ***** -->
+<!-- jQuery 2.2.4 -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<!-- Popper -->
+<script src="{% static 'js/popper.min.js' %}"></script>
+<!-- Bootstrap -->
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<!-- All Plugins -->
+<script src="{% static 'js/alime.bundle.js' %}"></script>
+<!-- Active -->
+<script src="{% static 'js/default-assets/active.js' %}"></script>
+<!-- jQuery !-->
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"> </script>-->
+<!-- jQuery UI !-->
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 

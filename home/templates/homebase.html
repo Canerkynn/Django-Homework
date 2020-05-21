@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-{%load static%}
+    {%load static%}
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -19,7 +19,7 @@
 
 
 </head>
-        {% block head%} {%endblock%}
+{% block head%} {%endblock%}
 
 <body>
 {%include 'preloader.html'%}
@@ -27,7 +27,6 @@
 {%block welcome%} {%endblock%}
 {%block galery%} {%endblock%}
 {%block content%} {%endblock%}
-{%block follower%} {%endblock%}
 {%include 'footer.html'%}
 
 </body>

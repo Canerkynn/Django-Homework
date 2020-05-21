@@ -31,6 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'content.apps.ContentConfig',
+    'user.apps.UserConfig',
     'mptt',
     'ckeditor',
     'ckeditor_uploader',

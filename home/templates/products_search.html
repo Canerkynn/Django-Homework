@@ -1,0 +1,76 @@
+{%extends "homebase.html" %}
+{%load static%}
+{%block title %} ProductsSearch Results {%endblock%}
+{%block description%} DESC {%endblock%}
+{%block keywords%} KEYWORDS {%endblock%}
+
+{% block head%} <link rel="shortcut icon" type="image/x-icon" href="{{setting.icon.url}}"/>{%endblock%}
+
+{%block content%}
+<style>
+    th, td {
+      padding: 15px;
+      font-size:25px;
+    }
+    table {
+        margin-bottom:20%;
+    }
+    .divv {
+      border-radius: 5px;
+      background-color: #f2f2f2;
+      padding: 10px;
+    }
+</style>
+<!-- Breadcrumb Area Start -->
+<section class="breadcrumb-area bg-img bg-overlay jarallax mb-150" style="background-image:url('{% static 'img/bg-img/search.jpg' %}')">
+    <div class="container h-100">
+        <div class="row h-100 align-items-center ">
+            <div class="col-12">
+                <div class="breadcrumb-content text-center">
+                    <h2 class="page-title">Search Results</h2>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center">
+                            <li class="breadcrumb-item"><a href="/"><i class="icon_house_alt"></i> Anasayfa</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">{{category.title}}</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Breadcrumb Area End -->
+<!-- About Us Area Start -->
+<div class="about-us-area section-padding-80-0 clearfix">
+    <div class="container">
+        <div class="row">
+            <table cellpadding="3" width="1200" class="divv">
+                <tr>
+                    <th>Image</th>
+                    <th>Product Name</th>
+                    <th>Category</th>
+                    <th>Author</th>
+                </tr>
+                {% for rs in products %}
+                <tr>
+                    <td class="single-portfolio-content ml-15 mr-15" style="width:75px;height:100px;" >
+                        <a href="/product/{{rs.id}}/{{rs.slug}}">
+                            <img src="{{rs.image.url}}" alt="{{rs.description}}">
+                        </a>
+                    </td>
+                    <td> <a href="/product/{{rs.id}}/{{rs.slug}}">{{rs.title}} </a></td>
+                    <td> {{rs.category}} </td>
+                    <td> {{rs.user.username}} </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+<!-- About Us Area End -->
+
+
+{%endblock%}
+{%block follower%} {% include "follower.html"%} {%endblock%}
+
+

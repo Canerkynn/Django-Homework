@@ -3,7 +3,7 @@ from django.contrib import admin
 # Register your models here.
 from mptt.admin import MPTTModelAdmin, DraggableMPTTAdmin
 
-from Human.models import Categories, Product, Images, Comment
+from Human.models import Categories, Product, Images, Comment, CommentContent
 
 
 class ProductImageInline(admin.TabularInline):
@@ -68,3 +68,4 @@ admin.site.register(Categories,CategoryAdmin2)
 admin.site.register(Product,ProductAdmin)
 admin.site.register(Images,ImagesAdmin)
 admin.site.register(Comment,CommentAdmin)
+admin.site.register(CommentContent)

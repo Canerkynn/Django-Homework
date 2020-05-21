@@ -68,220 +68,233 @@
          font-size:10px;
          color: #101010;
     }
+    .alime-btn.btn {
+        font-size: 15px;
+        float:right;
+        padding:5px;
+        background-color: #fc6060;
+    }
+     .nav {
+      width: 250px;
+    }
+    .anamenu, .altmenu {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      top:0;
+    }
+    .anamenu a{
+      display: block;
+      background-color:gray;
+      text-decoration: none;
+      padding: 10px;
+      color: #fff;
+    }
+    .anamenu a:hover {
+        background-color:#7f8c8d;
+        color:#000000;
+        font-size:22px;
+    }
+    .anamenu li:hover .altmenu {
+      display: block;
+      max-height: 200px;
+    }
+    .altmenu a{
+      background-color:black;
+
+    }
+    .altmenu a:hover {
+      background-color:#7f8c8d;
+    }
+    .altmenu {
+      overflow: hidden;
+      max-height:0;
+      -webkit-transition: all 0.5s ease-out;
+    }
 
 
 </style>
 <!-- Breadcrumb Area Start -->
-    <section class="breadcrumb-area blog bg-img bg-overlay jarallax " style="background-image:url('{{product.image.url}}')">
-        <div class="container h-100">
-            <div class="row h-100 align-items-center">
-                <div class="col-12">
-                    <div class="breadcrumb-content text-center">
-                        <a href="#" class="btn post-catagory">{{product.category}}</a>
-                        <h2 class="page-title">{{product.description}}</h2>
-                        <div class="post-meta">
-                            <a href="#" class="post-author">{{product.name}}</a>
-                            <a href="#" class="post-comments">{{product.email}}</a>
-                        </div>
-                        <ol class="breadcrumb justify-content-center">
-                                <li class="breadcrumb-item"><a href="/"><i class="icon_house_alt"></i> Anasayfa</a></li>
-                                <li class="breadcrumb-item "  aria-current="page"><a href="/categories/{{product.category_id}}/{{product.category.slug}}"><i></i> {{product.category}}</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">{{product.title}}</li>
-                       </ol>
+<section class="breadcrumb-area blog bg-img bg-overlay jarallax " style="background-image:url('{{product.image.url}}')">
+    <div class="container h-100">
+        <div class="row h-100 align-items-center">
+            <div class="col-12">
+                <div class="breadcrumb-content text-center">
+                    <a href="#" class="btn post-catagory">{{product.category}}</a>
+                    <h2 class="page-title">{{product.description}}</h2>
+                    <div class="post-meta">
+                        <a href="#" class="post-author">{{product.user.username}} </a>
+                        <a href="mailto:{{product.user.email}}" class="post-comments">{{product.user.email}}</a>
+                    </div>
+                    <ol class="breadcrumb justify-content-center">
+                        <li class="breadcrumb-item"><a href="/"><i class="icon_house_alt"></i> Anasayfa</a></li>
+                        <li class="breadcrumb-item "  aria-current="page"><a href="/categories/{{product.category_id}}/{{product.category.slug}}"><i></i> {{product.category}}</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">{{product.title}}</li>
+                    </ol>
 
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Breadcrumb Area End -->
+<!-- Blog Details Area Start -->
+<div class="alime--blog-area section-padding-80">
+    <div class="container">
+        <div class="row ">
+            <div class="col-3 mr-30">
+                <!-- Projects Menu -->
+                <div class="alime-projects-menu" >
+                    <div class="portfolio-menu text-center">
+                        {% load mptt_tags %}
+                        <nav class="nav">
+                            <h2 >Kategori Menü</h2>
+                            <ul class="anamenu">
+                                {% recursetree category %}
+                                <li><a href ="/categories/{{node.id}}/{{node.slug}}">{{node.title}}</a>
+                                    {% if not node.is_leaf_node %}
+                                    <ul class="altmenu" >
+                                        {{children}}
+                                    </ul>
+                                    {%endif%}
+                                </li>
+                                {%endrecursetree%}
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <div class="col-8">
+                <!-- Blog Details Text -->
+                <div class="blog-details-text">
+                    <p><a style="font-weight:800; margin-left:20%; margin-right:20%;">{{product.title}}</a></p>
+                    <div class="my-5">
+                        <div class="row">
+                            <div class="col-12 ">
+                                <!-- Single Gallery Item -->
+                                <div class="row alime-portfolio" >
+                                    <div class="col-12 col-sm-6 col-lg-6 single_gallery_item video country mb-30 wow fadeInUp" style="text-align:center;;" data-wow-delay="100ms">
+                                        <div class="single-portfolio-content " style="color:#fc0060;font-size:14px;  margin-right:50px;" >
+                                            <img src="{{product.image.url}}" alt="">
+                                            <div class="hover-content">
+                                                <a href="{{product.image.url}}" class="portfolio-img"> + </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% for rs in photos %}
+                                    <div class="col-12 col-sm-4 col-lg-4 single_gallery_item video country mb-30 wow fadeInUp" style="text-align:center;;" data-wow-delay="100ms">
+                                        <div class="single-portfolio-content " style="color:#fc0060;font-size:14px;  margin-right:50px;" >
+                                            <img src="{{rs.image.url}}" alt="">
+                                            <div class="hover-content">
+                                                <a href="{{rs.image.url}}" class="portfolio-img"> + </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="blog-details-text">
+                    <div class="my-5">
+                        <div class="row">
+                            <div class="col-12 ">
+                                <p>{{product.detail | safe}}</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-    <!-- Breadcrumb Area End -->
-    <!-- Blog Details Area Start -->
-    <div class="alime--blog-area section-padding-80">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-12 col-lg-10">
-                    <!-- Blog Details Text -->
-                    <div class="blog-details-text">
-                        <p><a style="font-weight:800;">Title :</a>{{product.title}}</p>
-                        <p><a style="font-weight:800;">Category :</a>{{product.category}}</p>
-                        <div class="my-5">
+    </div>
+</div>
+<!-- Blog Details Area End -->
+
+<!-- Comment Area Start -->
+<div class="comment-area" style="background-color:#eeeeee;" >
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-9">
+                <!-- Comments Area -->
+                <div class="comment_area clearfix">
+                    <h4 class="mb-10" style="color:#fc6060;">{{comments.count}} Comments</h4>
+                    <!-- Single Comment Area -->
+                    <div class="single_comment_area">
+                        <!-- Comment Content -->
+                        {% for rs in comments %}
+                        <div class="comment-content d-flex">
+                            <!-- Comment Author -->
+                            <div class="comment-author">
+                                <h5 style="margin-top:40%;">{{rs.user.username}}</h5>
+                            </div>
+                            <!-- Comment Meta -->
+                            <div class="comment-meta">
+                                <h6><a> </a> {{rs.subject}}</h6>
+                                <p>Comment : {{rs.comment}}</p>
+                                <a href="#" class="post-date">{{rs.create_at}}</a>
+                            </div>
+                            <div class="rating2">
+                                {% if rs.rate >= 1 %}<input type="radio" name="rate" value="5"/><label for="star5"></label>{% endif %}
+                                {% if rs.rate >= 2 %}<input type="radio" name="rate" value="4"/><label for="star4"></label>{% endif %}
+                                {% if rs.rate >= 3 %}<input type="radio" name="rate" value="3"/><label for="star3"></label>{% endif %}
+                                {% if rs.rate >= 4 %}<input type="radio" name="rate" value="2"/><label for="star2"></label>{% endif %}
+                                {% if rs.rate >= 5 %}<input type="radio" name="rate" value="1"/><label for="star1"></label>{% endif %}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div class="alime-contact-form mt-50">
+                        <h4 class="mb-30" style="color:#fc6060;">Yorum Eklemek İçin...</h4>
+                        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+                        {% if messages %}
+                        {% for message in messages %}
+                        <div class="alert alert-{{message.tags}}" role="alert">
+                            {{ message }}
+                        </div>
+                        {%endfor%}
+                        {% endif %}
+                        <!-- Form -->
+                        <form action="/human/addcomment/{{product.id}}" method="POST">
+                            {% csrf_token %}
+
                             <div class="row">
-                                <div class="col-12 ">
-                                    <!-- Single Gallery Item -->
-                                    <div class="row alime-portfolio" >
-                                        <div class="col-12 col-sm-6 col-lg-6 single_gallery_item video country mb-30 wow fadeInUp" style="text-align:center;;" data-wow-delay="100ms">
-                                            <div class="single-portfolio-content " style="color:#fc0060;font-size:14px;  margin-right:50px;" >
-                                                <img src="{{product.image.url}}" alt="">
-                                                <div class="hover-content">
-                                                    <a href="{{product.image.url}}" class="portfolio-img"> + </a>
-                                                </div>
-                                            </div>
+                                <div class="col-12">
+                                    <input type="text" name="subject" id="id_subject" class="form-control mb-30" placeholder="Subject">
+                                </div>
+                                <div class="col-12">
+                                    <textarea name="comment" id="id_comment" class="form-control mb-30" placeholder="Comment"></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <div>
+                                        <strong>Your Rating</strong>
+                                        <div class="rating">
+                                            <input type="radio" id="star5" name="rate" value="5"/><label for="star5"></label>
+                                            <input type="radio" id="star4" name="rate" value="4"/><label for="star4"></label>
+                                            <input type="radio" id="star3" name="rate" value="3"/><label for="star3"></label>
+                                            <input type="radio" id="star2" name="rate" value="2"/><label for="star2"></label>
+                                            <input type="radio" id="star1" name="rate" value="1"/><label for="star1"></label>
                                         </div>
-                                        {% for rs in photos %}
-                                        <div class="col-12 col-sm-4 col-lg-4 single_gallery_item video country mb-30 wow fadeInUp" style="text-align:center;;" data-wow-delay="100ms">
-                                            <div class="single-portfolio-content " style="color:#fc0060;font-size:14px;  margin-right:50px;" >
-                                                <img src="{{rs.image.url}}" alt="">
-                                                <div class="hover-content">
-                                                    <a href="{{rs.image.url}}" class="portfolio-img"> + </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        {% endfor %}
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <!-- Blockquote -->
-                        <blockquote class="alime-blockquote">
-                            <h4>{{product.description}}</h4>
-                            <h6>- {{product.name}}</h6>
-                        </blockquote>
-                    </div>
 
-                    <div class="blog-details-text">
-                        <div class="my-5">
-                            <div class="row">
-                                <div class="col-12 ">
-                                    <p>{{product.detail | safe}}</p>
+                                <div class="col-12">
+                                    {% if user.id is not None %}
+                                    <button class="btn alime-btn btn-2" style="margin-top:-12%;" >Send Comment</button>
+                                    {% else %}
+                                    Yorum Eklemek için Login olunuz!
+                                    {% endif %}
                                 </div>
                             </div>
-                        </div>
-                    </div>
-
-                    <!-- Post Author Area -->
-                    <div class="post-author-area mt-50 d-flex align-items-center justify-content-between">
-                        <ul class="popular-tags">
-                            <li><a class="btn badges-btn" href="#">{{product.category}}</a></li>
-                        </ul>
-
-                        <!-- Share Info -->
-                        <div class="post-social-info d-flex align-items-center">
-                            <p>Share:</p>
-                            <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                            <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                            <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
-                            <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-                            <a href="#"><i class="fa fa-youtube-play" aria-hidden="true"></i></a>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Blog Details Area End -->
-
-    <!-- Pager Area Start -->
-    <div class="alime-pager-area section-padding-0-80">
-        <div class="container">
-            <div class="row no-gutters">
-                <!-- Previous -->
-                <div class="col-6">
-                    <div class="previous bg-img slider-1" >
-                        <div class="overlay-content d-flex align-items-center justify-content-center">
-                            <a href="#" class="post-title">The Female Body Shape Men Find Most Attractive</a>
-                            <a href="#" class="previous-link"><i class="arrow_left"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <!-- Next -->
-                <div class="col-6">
-                    <div class="next bg-img slider-2">
-                        <div class="overlay-content d-flex align-items-center justify-content-center">
-                            <a href="#" class="post-title">Vietnam's largest art community</a>
-                            <a href="#" class="next-link"><i class="arrow_right"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Pager Area End -->
-
-    <!-- Comment Area Start -->
-    <div class="comment-area section-padding-80" >
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-9">
-                    <!-- Comments Area -->
-                    <div class="comment_area clearfix">
-                        <h4 class="mb-30">{{comments.count}} Comments</h4>
-
-                            <!-- Single Comment Area -->
-                            <div class="single_comment_area">
-                                <!-- Comment Content -->
-                                {% for rs in comments %}
-                                <div class="comment-content d-flex">
-                                    <!-- Comment Author -->
-                                    <div class="comment-author">
-                                        <img src="{{rs.product.image}}" alt="author">
-                                    </div>
-                                    <!-- Comment Meta -->
-                                    <div class="comment-meta">
-                                        <a href="#" class="post-date">{{rs.create_at}}</a>
-                                        <h5>Author : {{rs.user.username}}</h5>
-                                        <h6><a> </a> {{rs.subject}}</h6>
-                                        <p>Comment : {{rs.comment}}</p>
-                                    </div>
-                                    <div class="rating2">
-                                            {% if rs.rate >= 1 %}<input type="radio" name="rate" value="5"/><label for="star5"></label>{% endif %}
-                                            {% if rs.rate >= 2 %}<input type="radio" name="rate" value="4"/><label for="star4"></label>{% endif %}
-                                            {% if rs.rate >= 3 %}<input type="radio" name="rate" value="3"/><label for="star3"></label>{% endif %}
-                                            {% if rs.rate >= 4 %}<input type="radio" name="rate" value="2"/><label for="star2"></label>{% endif %}
-                                            {% if rs.rate >= 5 %}<input type="radio" name="rate" value="1"/><label for="star1"></label>{% endif %}
-                                    </div>
-                                </div>
-                                {% endfor %}
-                            </div>
-                            <div class="alime-contact-form mt-50">
-                                <h4 class="mb-30">Leave A Comment</h4>
-                                <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-                                {% if messages %}
-                                    {% for message in messages %}
-                                        <div class="alert alert-{{message.tags}}" roles="alert">
-                                            {{ message }}
-                                        </div>
-                                    {%endfor%}
-                                {% endif %}
-                                <p>Yorum için ...</p>
-                                <!-- Form -->
-                                <form action="/human/addcomment/{{product.id}}" method="POST">
-                                    {% csrf_token %}
-
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <input type="text" name="subject" id="id_subject" class="form-control mb-30" placeholder="Subject">
-                                        </div>
-                                        <div class="col-12">
-                                            <textarea name="comment" id="id_comment" class="form-control mb-30" placeholder="Comment"></textarea>
-                                        </div>
-                                        <div class="col-12">
-                                            <div>
-                                                <strong>Your Rating</strong>
-                                                <div class="rating">
-                                                    <input type="radio" id="star5" name="rate" value="5"/><label for="star5"></label>
-                                                    <input type="radio" id="star4" name="rate" value="4"/><label for="star4"></label>
-                                                    <input type="radio" id="star3" name="rate" value="3"/><label for="star3"></label>
-                                                    <input type="radio" id="star2" name="rate" value="2"/><label for="star2"></label>
-                                                    <input type="radio" id="star1" name="rate" value="1"/><label for="star1"></label>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-12">
-                                            {% if user.id is not None %}
-                                                <button type="" class="btn alime-btn btn-2 mt-15">Send Comment</button>
-                                            {% else %}
-                                                Yorum Eklemek için Login olunuz!
-                                            {% endif %}
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Comment Area End -->
+</div>
+<!-- Comment Area End -->
 {%endblock%}
 {%block follower%} {% include "follower.html"%} {%endblock%}
 

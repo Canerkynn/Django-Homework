@@ -1,0 +1,201 @@
+{%extends "homebase.html" %}
+{%load static%}
+{%block title %} {{content.title}} {%endblock%}
+{%block description%} {{ setting.description }} {%endblock%}
+{%block keywords%} {{ setting.keywords }} {%endblock%}
+
+{% block head%} <link rel="shortcut icon" type="image/x-icon" href="{{setting.icon.url}}"/>{%endblock%}
+
+{%block content%}
+<!-- Breadcrumb Area Start -->
+<style>
+    .alime-btn.btn {
+        font-size: 15px;
+        float:right;
+        padding:5px;
+        background-color: #fc6060;
+    }
+    .rating{
+        position: relative;
+        top:50%;
+        left:50%;
+        transform:translate(-100%,-50%) rotateY(180deg);
+        display:flex;
+    }
+    .rating input{
+        display:none;
+    }
+    .rating label{
+        display:block;
+        cursor:pointer;
+        width:50px;
+    }
+    .rating label:before {
+         content: '\f005';
+         font-family:fontAwesome;
+         position:relative;
+         display:block;
+         font-size:35px;
+         color: #101010;
+    }
+     .rating label:after {
+         content: '\f005';
+         font-family:fontAwesome;
+         position:absolute;
+         display:block;
+         font-size:35px;
+         color: #ff0000;
+         opacity:0;
+         top:0;
+         transition:.5s;
+         text-shadow: 0 2px 5px rgba(0,0,0,.5);
+    }
+    .rating label:hover:after,
+    .rating label:hover ~ label:after,
+    .rating input:checked ~ label:after {
+        opacity:1;
+    }
+    .rating2{
+        position: relative;
+        display:flex;
+        margin-top:4%;
+        margin-left:3%;
+    }
+    .rating2 input{
+        display:none;
+    }
+    .rating2 label{
+        display:block;
+        width:10px;
+    }
+    .rating2 label:before {
+         content: '\f005';
+         font-family:fontAwesome;
+         position:relative;
+         display:block;
+         font-size:10px;
+         color: #101010;
+    }
+
+</style>
+<section class="breadcrumb-area bg-img bg-overlay jarallax mb-150" style="background-image:url('{{content.image.url}}')">
+    <div class="container h-100">
+        <div class="row h-100 align-items-center ">
+            <div class="col-12">
+                <div class="breadcrumb-content text-center">
+                    <h2 class="page-title">{{content.menu}}</h2>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center">
+                            <li class="breadcrumb-item"><a href="/"><i class="icon_house_alt"></i> Anasayfa</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">{{content.title}}</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Breadcrumb Area End -->
+<!-- About Us Area Start -->
+<div class="about-us-area section-padding-80-0 clearfix">
+    <div class="container">
+        <div class="row align-items-center">
+            {{ content.detail | safe}}
+        </div>
+    </div>
+</div>
+<hr>
+<!-- About Us Area End -->
+{% for rs in images%}
+<img src="{{ rs.image.url }}" height="200" alt="">
+{% endfor %}
+<hr>
+
+<div class="comment-area" style="background-color:#eeeeee;" >
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-9">
+                <!-- Comments Area -->
+                <div class="comment_area clearfix">
+                    <h4 class="mb-10" style="color:#fc6060;">{{comments.count}} Comments</h4>
+                    <!-- Single Comment Area -->
+                    <div class="single_comment_area">
+                        <!-- Comment Content -->
+                        {% for rs in comments %}
+                        <div class="comment-content d-flex">
+                            <!-- Comment Author -->
+                            <div class="comment-author">
+                                <h5 style="margin-top:40%;">{{rs.user.username}}</h5>
+                            </div>
+                            <!-- Comment Meta -->
+                            <div class="comment-meta">
+                                <h6><a> </a> {{rs.subject}}</h6>
+                                <p>Comment : {{rs.comment}}</p>
+                                <a href="#" class="post-date">{{rs.create_at}}</a>
+                            </div>
+                            <div class="rating2">
+                                {% if rs.rate >= 1 %}<input type="radio" name="rate" value="5"/><label for="star5"></label>{% endif %}
+                                {% if rs.rate >= 2 %}<input type="radio" name="rate" value="4"/><label for="star4"></label>{% endif %}
+                                {% if rs.rate >= 3 %}<input type="radio" name="rate" value="3"/><label for="star3"></label>{% endif %}
+                                {% if rs.rate >= 4 %}<input type="radio" name="rate" value="2"/><label for="star2"></label>{% endif %}
+                                {% if rs.rate >= 5 %}<input type="radio" name="rate" value="1"/><label for="star1"></label>{% endif %}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div class="alime-contact-form mt-50">
+                        <h4 class="mb-30" style="color:#fc6060;">Yorum Eklemek İçin...</h4>
+                        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+                        {% if messages %}
+                        {% for message in messages %}
+                        <div class="alert alert-{{message.tags}}" role="alert">
+                            {{ message }}
+                        </div>
+                        {%endfor%}
+                        {% endif %}
+                        <!-- Form -->
+                        <form action="/human/addcomment/{{product.id}}" method="POST">
+                            {% csrf_token %}
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <input type="text" name="subject" id="id_subject" class="form-control mb-30" placeholder="Subject">
+                                </div>
+                                <div class="col-12">
+                                    <textarea name="comment" id="id_comment" class="form-control mb-30" placeholder="Comment"></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <div>
+                                        <strong>Your Rating</strong>
+                                        <div class="rating">
+                                            <input type="radio" id="star5" name="rate" value="5"/><label for="star5"></label>
+                                            <input type="radio" id="star4" name="rate" value="4"/><label for="star4"></label>
+                                            <input type="radio" id="star3" name="rate" value="3"/><label for="star3"></label>
+                                            <input type="radio" id="star2" name="rate" value="2"/><label for="star2"></label>
+                                            <input type="radio" id="star1" name="rate" value="1"/><label for="star1"></label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    {% if user.id is not None %}
+                                    <button class="btn alime-btn btn-2" style="margin-top:-12%;" >Send Comment</button>
+                                    {% else %}
+                                    Yorum Eklemek için Login olunuz!
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <!-- Comment Area End -->
+
+
+    {%endblock%}
+    {%block follower%} {% include "follower.html"%} {%endblock%}
+
+

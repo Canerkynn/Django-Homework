@@ -1,0 +1,180 @@
+{%extends "homebase.html" %}
+{%load static%}
+{%block title %}User Profile  {{profile.user_name}} Profile{%endblock%}
+{%block description%} DESC {%endblock%}
+{%block keywords%} KEYWORDS {%endblock%}
+
+{% block head%} <link rel="shortcut icon" type="image/x-icon" href="{{setting.icon.url}}"/>{%endblock%}
+
+
+{%block galery%}
+<style>
+.btn-group a {
+  background-color: orange;
+  border: 1px solid black;
+  color: black;
+  padding: 5px 10px;
+  cursor: pointer;
+  float: left;
+  border-radius:5%;
+  }
+.btn-group a:hover{
+  background-color:black;
+  color:orange;
+}
+
+input[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+.divv {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+label{
+    font-weight:bold;
+}
+</style>
+<!-- Breadcrumb Area Start -->
+<section class="breadcrumb-area bg-img bg-overlay jarallax mb-150" style=" background-image: url('{{profile.image.url}}')">
+    <div class="container h-100">
+        <div class="row h-100 align-items-center ">
+            <div class="col-12">
+                <div class="breadcrumb-content text-center">
+                    <h2 class="page-title">User Profile</h2>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center">
+                            <li class="breadcrumb-item"><a href="/"><i class="icon_house_alt"></i> Anasayfa</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">User Profile</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Breadcrumb Area End -->
+<!-- About Us Area Start -->
+<div class="container section-padding-80-0 ">
+    <div class="row mb-100">
+        <div class ="alime-contact-form col-md-3  mr-10">
+            <div class="section-title ">
+                <h3 class="title">User Panel </h3>
+                <div style="width: 80%; height: 3px; background-color: orange; "></div>
+            </div>
+            {% include 'user_panel.html'%}
+        </div>
+
+
+        <div class ="col-md-9">
+            <div class="about-us-area clearfix mb-50 divv">
+                <h3 class="title">User Information  </h3>
+                <div style="width: 100%; height: 3px; background-color: orange;  "></div>
+                {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-{{message.tags}}" role="alert">
+                    {{ message }}
+                </div>
+                {%endfor%}
+                {% endif %}
+                <table cellpadding="2" style="display:inline; margin-left:25%;" >
+                    <tr style=" float:left; margin-top:15%; margin-bottom:15%; margin-left:50%;">
+                        <th></th>
+                        <td  style="width:100px; height:150px;" >
+                            <img style="border-radius: 45px;" src="{{profile.image.url}}"/>
+                            <div class="btn-group" >
+                                <a href="/user/update" style="margin-right:5%; margin-left:-5%; margin-top:5%;">Update Profile</a>
+                                <a href="/user/password" style="margin-left: 5%; margin-top:5%;">Change Password</a>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr >
+                        <th style="background-color:black; height:2px;"></th>
+                        <td style="background-color:black; height:2px;"></td>
+                    </tr>
+                    <tr style=" font-size:20px;">
+                        <th>Name Surname</th>
+                        <td>{{profile.user_name}}</td>
+                    </tr>
+                    <tr>
+                        <th style="background-color:black; height:2px; margin-top:5%;"></th>
+                        <td style="background-color:black; height:2px; margin-top:5%;"></td>
+                    </tr>
+                    <tr  style=" font-size:20px;">
+                        <th>Email</th>
+                        <td>{{profile.user.email}}</td>
+                        <td><br/><hr></td>
+                    </tr>
+                    <tr>
+                        <th style="background-color:black; height:2px; margin-top:5%;"></th>
+                        <td style="background-color:black; height:2px; margin-top:5%;"></td>
+                    </tr>
+                    <tr  style=" font-size:20px;">
+                        <th>Phone</th>
+                        <td>{{profile.phone}}</td>
+                        <td><br/><hr></td>
+                    </tr>
+                    <tr>
+                        <th style="background-color:black; height:2px; margin-top:5%;"></th>
+                        <td style="background-color:black; height:2px; margin-top:5%;"></td>
+                    </tr>
+                    <tr  style=" font-size:20px;">
+                        <th>Address</th>
+                        <td>{{profile.address}}</td>
+                        <td><br/><hr></td>
+                    </tr>
+                    <tr>
+                        <th style="background-color:black; height:2px; margin-top:5%;"></th>
+                        <td style="background-color:black; height:2px; margin-top:5%;"></td>
+                    </tr>
+                    <tr  style=" font-size:20px;">
+                        <th>City</th>
+                        <td>{{profile.city}}</td>
+                        <td><br/><hr></td>
+                    </tr>
+                    <tr>
+                        <th style="background-color:black; height:2px; margin-top:5%;"></th>
+                        <td style="background-color:black; height:2px; margin-top:5%;"></td>
+                    </tr>
+                    <tr  style=" font-size:20px;">
+                        <th>Country</th>
+                        <td>{{profile.country}}</td>
+                        <td><br/><hr></td>
+                    </tr>
+                    <tr>
+                        <th style="background-color:black; height:2px; margin-top:5%;"></th>
+                        <td style="background-color:black; height:2px; margin-top:5%;"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- About Us Area End -->
+
+{%endblock%}
+{%block follower%} {% include "follower.html"%} {%endblock%}
+
+

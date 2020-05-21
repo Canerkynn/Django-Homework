@@ -47,71 +47,75 @@
       -webkit-transition: all 0.5s ease-out;
     }
 </style>
-     <section class="breadcrumb-area bg-img bg-overlay jarallax mb-150 slider-1  ">
-         <div class="container h-100">
-             <div class="row h-100 align-items-center ">
-                 <div class="col-12">
-                     <div class="breadcrumb-content text-center">
-                         <h2 class="page-title">Product</h2>
-                         <nav aria-label="breadcrumb">
-                             <ol class="breadcrumb justify-content-center">
-                                 <li class="breadcrumb-item"><a href="/"><i class="icon_house_alt"></i> Anasayfa</a></li>
-                                 <li class="breadcrumb-item active" aria-current="page">{{categorydata.title}}</li>
-                             </ol>
-                         </nav>
-                     </div>
-                 </div>
-             </div>
-         </div>
-     </section>
-    <div class="alime-portfolio-area section-padding-80 clearfix">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-2 mr-30">
-                    <!-- Projects Menu -->
-                    <div class="alime-projects-menu" >
-                        <div class="portfolio-menu text-center">
-                            {% load mptt_tags %}
-                            <nav class="nav">
-                                <h2 >Kategori Menü</h2>
-                                <ul class="anamenu">
-                                    {% recursetree category %}
-                                    <li><a href ="/categories/{{node.id}}/{{node.slug}}">{{node.title}}</a>
-                                        {% if not node.is_leaf_node %}
-                                        <ul class="altmenu" >
-                                            <li><a href ="/categories/{{node.id}}/{{node.slug}}"> {{children}}</a></li>
-                                        </ul>
-                                        {%endif%}
-                                    </li>
-                                    {%endrecursetree%}
-                                </ul>
-                            </nav>
-                        </div>
+<section class="breadcrumb-area bg-img bg-overlay jarallax mb-150" style=" background-image: url('{{categorydata.image.url}}')">
+    <div class="container h-100">
+        <div class="row h-100 align-items-center ">
+            <div class="col-12">
+                <div class="breadcrumb-content text-center">
+                    <h2 class="page-title">{{categorydata.title}}</h2>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center">
+                            <li class="breadcrumb-item"><a href="/"><i class="icon_house_alt"></i> Anasayfa</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">{{categorydata.title}}</li>
+                        </ol>
+                    </nav>
+                    <div class="hero-btn-group" data-animation="bounceInDown" data-delay="100ms">
+                        <a style="color:white;" >{{categorydata.description}}</a>
                     </div>
-
-                </div>
-                <div class=" col-9 ml-50 mt-30">
-                <!-- Single Gallery Item -->
-                    <div class="row alime-portfolio">
-                        {% for rs in products %}
-                        <div class="col-12 col-sm-5 col-lg-5 single_gallery_item video country mb-30 wow fadeInUp" style="text-align:center;" data-wow-delay="100ms">
-                            <a href ="/product/{{rs.id}}/{{rs.slug}}" style="font-weight:800; ">{{rs.title}}</a>
-                            <div class="single-portfolio-content ml-15 mr-15" style="color:#fc0060;font-size:14px;" >
-                                <img src="{{rs.image.url}}" alt="{{rs.description}}">
-                                <div class="hover-content">
-                                   <a href="{{rs.image.url}}" class="portfolio-img"> + </a>
-                                </div>
-                                <a style="font-weight:800;">{{rs.title}}</a>
-                            </div>
-                        </div>
-                        {% endfor %}
+                    <div class="hero-btn-group" data-animation="bounceInDown" data-delay="100ms">
+                        <a style="color:white;" >{{categorydata.slug}}</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</section>
+<div class="alime-portfolio-area section-padding-80 clearfix">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-2 mr-30">
+                <!-- Projects Menu -->
+                <div class="alime-projects-menu" >
+                    <div class="portfolio-menu text-center">
+                        {% load mptt_tags %}
+                        <nav class="nav">
+                            <h2 >Kategori Menü</h2>
+                            <ul class="anamenu">
+                                {% recursetree category %}
+                                <li><a href ="/categories/{{node.id}}/{{node.slug}}">{{node.title}}</a>
+                                    {% if not node.is_leaf_node %}
+                                    <ul class="altmenu" >
+                                        {{children}}
+                                    </ul>
+                                    {%endif%}
+                                </li>
+                                {%endrecursetree%}
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <div class=" col-9 ml-50 mt-30">
+                <!-- Single Gallery Item -->
+                <div class="row alime-portfolio">
+                    {% for rs in products %}
+                    <div class="col-12 col-sm-5 col-lg-5 single_gallery_item video country mb-30 wow fadeInUp" style="text-align:center;" data-wow-delay="100ms">
+                        <div class="single-portfolio-content ml-15 mr-15" style="color:#fc0060;font-size:14px;" >
+                            <img src="{{rs.image.url}}" alt="{{rs.description}}">
+                            <div class="hover-content">
+                                <a href="{{rs.image.url}}" class="portfolio-img"> + </a>
+                            </div>
+                        </div>
+                        <a href ="/product/{{rs.id}}/{{rs.slug}}" style="font-weight:800; ">Fotoğraf Ayrıntısı için...</a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {%endblock%}
-    <!-- Gallery Area End -->
+<!-- Gallery Area End -->
 {%block follower%} {% include "follower.html"%} {%endblock%}
 
 

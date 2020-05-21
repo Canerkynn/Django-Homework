@@ -1,32 +1,32 @@
 <!-- Welcome Area Start -->
 {%load static%}
-    <section class="welcome-area">
-        <div class="welcome-slides owl-carousel">
-            <!-- Single Slide-->
-            {% for rs in sliderdata %}
-            <div class="single-welcome-slide bg-img bg-overlay " >
-                <div class="single-welcome-slide bg-img" style="370px; background-image: url('{{rs.image.url}}')">
-                    <div class="container h-100 ">
-                        <div class="row h-100 align-items-center">
-                            <!-- Welcome Text -->
-                            <div class="col-12 col-lg-8 col-xl-6">
-                                <div class="welcome-text">
-                                    <h2 data-animation="bounceInDown" data-delay="900ms">Merhaba, <br>Ben {{ rs.name }} </h2>
-                                    <p data-animation="bounceInDown" data-delay="500ms">{{ rs.description }}</p>
-                                    <div class="hero-btn-group" data-animation="bounceInDown" data-delay="100ms">
-                                        <a class="hero-mail-contact" href="mailto:{{rs.mail}}">{{ rs.email }}</a>
-                                    </div>
-                                    <div class="hero-btn-group mt-30" data-animation="bounceInDown" data-delay="100ms">
-                                        <a  class="hero-mail-contact"  href="/product/{{rs.id}}/{{rs.slug}}">{{rs.title}}</a>
-                                    </div>
-
+<section class="welcome-area">
+    <div class="welcome-slides owl-carousel">
+        <!-- Single Slide-->
+        {% for rs in sliderdata %}
+        <div class="single-welcome-slide bg-img bg-overlay " >
+            <div class="single-welcome-slide bg-img" style=" background-image: url('{{rs.image.url}}')">
+                <div class="container h-100 ">
+                    <div class="row h-100 align-items-center">
+                        <!-- Welcome Text -->
+                        <div class="col-12 col-lg-8 col-xl-6">
+                            <div class="welcome-text">
+                                <h2 data-animation="bounceInDown" data-delay="900ms">{{ rs.title }} </h2>
+                                <h3 data-animation="bounceInDown" data-delay="500ms" style="color:white;">{{ rs.description }}</h3>
+                                <div class="hero-btn-group" data-animation="bounceInDown" data-delay="100ms">
+                                    <a class="hero-mail-contact" href="mailto:{{rs.mail}}">{{ rs.email }}</a>
                                 </div>
+                                <div class="hero-btn-group mt-30" data-animation="bounceInDown" data-delay="100ms">
+                                    <a  class="hero-mail-contact" style="font-size:30px; color:white;"  href="/categories/{{rs.category.id}}/{{rs.category.slug}}">Kategori : {{rs.category}}</a>
+                                </div>
+
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            {%endfor%}
         </div>
-    </section>
-    <!-- Welcome Area End -->
+        {%endfor%}
+    </div>
+</section>
+<!-- Welcome Area End -->

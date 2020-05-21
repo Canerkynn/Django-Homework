@@ -1,0 +1,80 @@
+{%extends "homebase.html" %}
+{%load static%}
+{%block title %} Sıkça Sorulan Sorular {%endblock%}
+{%block description%} {{ setting.description }} {%endblock%}
+{%block keywords%} {{ setting.keywords }} {%endblock%}
+
+{% block head%}
+<link rel="shortcut icon" type="image/x-icon" href="{{setting.icon.url}}"/>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+ <script>
+  $( function() {
+    $( "#accordion" ).accordion({
+      collapsible: true
+    });
+  } );
+  </script>
+
+{%endblock%}
+
+{%block content%}
+<style>
+    th, td {
+      padding: 15px;
+      font-size:25px;
+    }
+    table {
+        margin-bottom:20%;
+    }
+    .divv {
+      border-radius: 5px;
+      background-color: #f2f2f2;
+      padding: 10px;
+    }
+</style>
+<!-- Breadcrumb Area Start -->
+<section class="breadcrumb-area bg-img bg-overlay jarallax mb-150" style="background-image:url('{% static 'img/bg-img/faq.jpg' %}')">
+    <div class="container h-100">
+        <div class="row h-100 align-items-center ">
+            <div class="col-12">
+                <div class="breadcrumb-content text-center">
+                    <h2 class="page-title">Sıkça Sorulan Sorular</h2>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center">
+                            <li class="breadcrumb-item"><a href="/"><i class="icon_house_alt"></i> Anasayfa</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Sıkça Sorulan Sorular</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Breadcrumb Area End -->
+<!-- About Us Area Start -->
+<div class="about-us-area section-padding-80-0 clearfix">
+    <div class="container">
+        <div class="row">
+            <div id="accordion">
+                {% for rs in faq %}
+              <h3>{{rs.question}}</h3>
+              <div>
+                <p>
+                    {{rs.answer}}
+                </p>
+              </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+<!-- About Us Area End -->
+
+
+{%endblock%}
+{%block follower%} {% include "follower.html"%} {%endblock%}
+
+

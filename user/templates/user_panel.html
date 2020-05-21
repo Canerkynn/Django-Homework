@@ -1,0 +1,35 @@
+<style>
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  min-width: 230px;
+}
+
+.dropdown-content a {
+  color: black;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown a:hover {
+    color: red;
+    font-size:20px;
+}
+
+.show {display: block;}
+</style>
+
+<div class="dropdown">
+    <ul >
+        <li style=" margin-bottom:5%; font-size:20px;" ><a href="/user">> User Profile</a></li>
+        <li style=" margin-bottom:5%; font-size:20px;" ><a href="/user/comments/">> My Comments</a></li>
+        <li style=" margin-bottom:5%; font-size:20px;" ><a href="/user/posts/">> My Posts</a></li>
+        <li style=" margin-bottom:5%; font-size:20px;" ><a href="/user/contents/">> My Contents</a></li>
+        <li style=" margin-bottom:5%; font-size:20px;" ><a href="/logout">> Logout</a></li>
+    </ul>
+</div>

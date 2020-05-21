@@ -2,12 +2,14 @@ from django.contrib.auth.models import User
 from django.db import models
 
 # Create your models here.
-from django.forms import ModelForm
+from django.forms import ModelForm, Select
 from django.urls import reverse
 from django.utils.safestring import mark_safe
 from ckeditor_uploader.fields import RichTextUploadingField
 from mptt.fields import TreeForeignKey
 from mptt.models import MPTTModel
+
+from content.models import Content, CImages
 
 
 class Categories(MPTTModel):
@@ -36,7 +38,6 @@ class Categories(MPTTModel):
             k = k.parent
         return ' / '.join(full_path[::-1])
 
-
     def image_tag(self):
         return mark_safe('<img src="{}" height="50"/>'.format(self.image.url))
     image_tag.short_description = 'Images'
@@ -44,14 +45,12 @@ class Categories(MPTTModel):
     def get_absolute_url(self):
         return reverse('category_detail',kwargs={'slug':self.slug})
 
-
-class Product(models.Model):
-    STATUS = (
+STATUS = (
         ('True','Evet'),
         ('False','Hayır'),
     )
-    name= models.CharField(max_length=20)
-    email=models.CharField(max_length=50)
+class Product(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
     category = models.ForeignKey(Categories,on_delete=models.CASCADE) # bu product kategoriyle ilişki ile kurar
     title = models.CharField(max_length=50)
     description = models.CharField(max_length=255)
@@ -64,7 +63,7 @@ class Product(models.Model):
     slug = models.SlugField(null=False,unique=True)
 
     def __str__(self):
-        return self.name
+        return self.title
 
     def image_tag(self):
         return mark_safe('<img src="{}" height="50"/>'.format(self.image.url))
@@ -75,6 +74,11 @@ class Product(models.Model):
 
     def get_absolute_url(self):
         return reverse('category_detail',kwargs={'slug':self.slug})
+
+class ProductForm(ModelForm):
+    class Meta:
+        model = Product
+        fields = ['category', 'title', 'keywords', 'description', 'image','detail','slug',]
 
 class Images(models.Model):
     photo = models.ForeignKey(Product,on_delete=models.CASCADE)
@@ -87,14 +91,13 @@ class Images(models.Model):
         return mark_safe('<img src="{}" height="50"/>'.format(self.image.url))
     image_tag.short_description = 'Images'
 
-
 class Comment(models.Model):
     STATUS = (
         ('New','Yeni'),
         ('True','Evet'),
         ('False','Hayır'),
     )
-    product = models.ForeignKey(Product,on_delete=models.CASCADE)
+    product = models.ForeignKey(Product,on_delete=models.CASCADE,blank=True)
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     subject = models.CharField(max_length=50, blank=True)
     comment = models.TextField(max_length=200)
@@ -111,3 +114,27 @@ class CommentForm(ModelForm):
     class Meta:
         model = Comment
         fields = ['subject','comment','rate']
+
+class CommentContent(models.Model):
+    STATUS = (
+        ('New','Yeni'),
+        ('True','Evet'),
+        ('False','Hayır'),
+    )
+    content = models.ForeignKey(Content,on_delete=models.CASCADE,blank=True)
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    subject = models.CharField(max_length=50, blank=True)
+    comment = models.TextField(max_length=200)
+    rate = models.IntegerField(blank=True)
+    status = models.CharField(max_length=10,choices=STATUS,default='New')
+    ip = models.CharField(blank=True,max_length=20)
+    create_at = models.DateTimeField(auto_now_add=True)
+    update_at = models.DateTimeField(auto_now=True)
+
+    def __str__ (self):
+        return self.subject
+
+class ProductImageForm(ModelForm):
+    class Meta:
+        model = Images
+        fields = ['title', 'image']

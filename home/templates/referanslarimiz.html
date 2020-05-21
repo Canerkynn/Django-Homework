@@ -1,41 +1,41 @@
 {%extends "homebase.html" %}
 {%load static%}
 {%block title %}Referanslarimiz - {{setting.company}} {%endblock%}
-{%block description%} DESC {%endblock%}
-{%block keywords%} KEYWORDS {%endblock%}
+{%block description%} {{ setting.description }} {%endblock%}
+{%block keywords%} {{ setting.keywords }} {%endblock%}
 
 {% block head%} <link rel="shortcut icon" type="image/x-icon" href="{{setting.icon.url}}"/>{%endblock%}
 
 
 {%block galery%}
- <!-- Breadcrumb Area Start -->
-    <section class="breadcrumb-area bg-img bg-overlay jarallax mb-150 slider-1  ">
-        <div class="container h-100">
-            <div class="row h-100 align-items-center ">
-                <div class="col-12">
-                    <div class="breadcrumb-content text-center">
-                        <h2 class="page-title">Referanslarımız</h2>
-                        <nav aria-label="breadcrumb">
-                            <ol class="breadcrumb justify-content-center">
-                                <li class="breadcrumb-item"><a href="index.html"><i class="icon_house_alt"></i> Anasayfa</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Referanslarımız</li>
-                            </ol>
-                        </nav>
-                    </div>
+<!-- Breadcrumb Area Start -->
+<section class="breadcrumb-area bg-img bg-overlay jarallax mb-150 "  style="background-image:url('{% static 'img/bg-img/referanslarimiz.jpg' %}')">
+    <div class="container h-100">
+        <div class="row h-100 align-items-center ">
+            <div class="col-12">
+                <div class="breadcrumb-content text-center">
+                    <h2 class="page-title">Referanslarımız</h2>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center">
+                            <li class="breadcrumb-item"><a href="index.html"><i class="icon_house_alt"></i> Anasayfa</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Referanslarımız</li>
+                        </ol>
+                    </nav>
                 </div>
             </div>
         </div>
-    </section>
-    <!-- Breadcrumb Area End -->
-       <!-- About Us Area Start -->
-    <div class="about-us-area section-padding-80-0 clearfix">
-        <div class="container">
-            <div class="row align-items-center">
-                {{ setting.references | safe}}
-            </div>
+    </div>
+</section>
+<!-- Breadcrumb Area End -->
+<!-- About Us Area Start -->
+<div class="about-us-area section-padding-80-0 clearfix">
+    <div class="container">
+        <div class="row align-items-center">
+            {{ setting.references | safe}}
         </div>
     </div>
-    <!-- About Us Area End -->
+</div>
+<!-- About Us Area End -->
 
 {%endblock%}
 {%block follower%} {% include "follower.html"%} {%endblock%}

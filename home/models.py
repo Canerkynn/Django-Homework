@@ -28,6 +28,7 @@ class Setting(models.Model) :
     facebook = models.CharField(max_length=50)
     instagram = models.CharField(max_length=50)
     twitter = models.CharField(max_length=50)
+    linkedin = models.CharField(max_length=50)
     aboutus = RichTextUploadingField() # bunu yazmak için ckeditor yükledik ve import ettik.
     contact = RichTextUploadingField()
     references = RichTextUploadingField()
@@ -37,7 +38,6 @@ class Setting(models.Model) :
 
     def __str__(self):
         return self.title  # admin sitesinde göstereceği
-
 
 class ContactFormMessage(models.Model):
     STATUS = ( # Mesaj new, read, cloased olarak ayrılsın diye.
@@ -59,7 +59,7 @@ class ContactFormMessage(models.Model):
         return self.name
 
 class ContactFormu(ModelForm): # burada iletişim.py da oluşturulan sitenin mesaj gönderme kısmının nasıl olacağı
-                               # temeli yazılmıştır.
+    # temeli yazılmıştır.
     class Meta:
         model =ContactFormMessage
         fields = ['name','email','subject','message']
@@ -77,20 +77,34 @@ class UserProfile(models.Model):
     city = models.CharField(blank= True, max_length=20)
     country = models.CharField(blank= True, max_length=20)
     image = models.ImageField(blank= True, upload_to='images/users/')
-    
 
     def __str__(self):
         return self.user.username
 
     def user_name(self):
-        return '['+self.user.username+']' + '  ' + self.user.first_name+ '  '+ self.user.last_name
+        return '[ '+self.user.username+' ]' + '  ' + self.user.first_name+ '  '+ self.user.last_name
 
     def image_tag(self):
         return mark_safe('<img src ="{}" height="50"/>'.format(self.image.url))
     image_tag.short_description = 'Image'
 
 class UserProfileForm(ModelForm):  # burada iletişim.py da oluşturulan sitenin mesaj gönderme kısmının nasıl olacağı
-# temeli yazılmıştır.
+    # temeli yazılmıştır.
     class Meta:
         model = UserProfile
         fields = ['phone', 'address', 'city', 'country','image']
+
+class FAQ(models.Model) :
+    STATUS = (  # seçim yapılması için
+        ('True', 'Evet'),
+        ('False','Hayır'),
+    )
+    ordernumber = models.IntegerField()
+    question = models.CharField(max_length=150)
+    answer = models.TextField()
+    status = models.CharField(max_length=10,choices=STATUS)
+    create_at = models.DateTimeField(auto_now_add=True) # zamanları alıp ne zaman oluşturulduğunu biliyoruz.
+    update_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.question  # admin sitesinde göstereceği

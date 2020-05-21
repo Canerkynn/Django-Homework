@@ -1,0 +1,206 @@
+{%extends "homebase.html" %}
+{%load static%}
+{%block title %} {{setting.title}} {%endblock%}
+{%block description%} {{ setting.description }} {%endblock%}
+{%block keywords%} {{ setting.keywords }} {%endblock%}
+{% block head%} <link rel="shortcut icon" type="image/x-icon" href="{{setting.icon.url}}"/>{%endblock%}
+
+{%block content%}
+<style>
+.nav {
+  width: 250px;
+}
+
+.anamenu, .altmenu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  top:0;
+}
+
+.anamenu a{
+  display: block;
+  background-color:#333;
+  text-decoration: none;
+  padding: 10px;
+  color: #fff;
+}
+
+.anamenu a:hover {
+    background-color:#7f8c8d;
+    color:#000000;
+    font-size:22px;
+}
+
+
+.anamenu li:hover .altmenu {
+  display: block;
+  max-height:200px;
+}
+
+.altmenu a{
+  background-color:#000;
+}
+
+.altmenu a:hover {
+  background-color:#7f8c8d;
+}
+
+.altmenu {
+  overflow: hidden;
+  max-height: 0;
+  -webkit-transition: all 0.5s ease-out;
+}
+
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+  float:left;
+  width:100%;
+  height:50px;
+}
+
+.topnav a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+
+}
+.topnav .icon {
+  display: none;
+}
+
+.dropdownn {
+  overflow: hidden;
+  float:left;
+}
+
+.dropdownn .dropbtn {
+  font-size: 17px;
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+
+
+}
+
+.dropdownn-content {
+  display: none;
+  position: absolute;
+  background-color: black;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  margin-top:3%;
+  float:left;
+  width:10%;
+
+}
+
+.dropdownn-content a {
+  float: left;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+  top:0;
+  color:white;
+  width:100%;
+}
+
+.topnav a:hover, .dropdownn:hover .dropbtn {
+  background-color: #555;
+  color: white;
+  font-size:18px;
+}
+
+.dropdownn-content a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.dropdownn:hover .dropdownn-content {
+  display: block;
+}
+
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<!-- jQuery UI !-->
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<!-- Breadcrumb Area Start -->
+<section class="breadcrumb-area bg-img bg-overlay jarallax mb-150 "  style="background-image:url('{% static 'img/bg-img/4004.png' %}')">
+    <img src="" alt="">
+    <div class="container h-100">
+        <div class="row h-100 align-items-center ">
+            <div class="col-12">
+                <div class="breadcrumb-content text-center">
+                    <h2 class="page-title" style="color:red;">Sayfa Bulunanamadı</h2>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center">
+                            <li class="breadcrumb-item"><a href="/"><i class="icon_house_alt"></i> Anasayfa</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Hata Sayfası</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Breadcrumb Area End -->
+<div class="alime-portfolio-area section-padding-80 clearfix "  style="margin-bottom:10%;">
+    <div class="container-fluid">
+        <div class="row" style="margin-bottom:5%;  border-radius:20px;">
+
+            <ul class="topnav" id="myTopnav">
+                <li class="dropdownn"><a class="active" href="/">Anasayfa</a></li>
+                <li class="dropdownn"><a href="/hakkimizda">Hakkımızda</a></li>
+                <li class="dropdownn"><a href="/iletisim">İletişim</a></li>
+                {% load mptt_tags %}
+                {% if menu %}
+                {% recursetree menu %}
+                <li class="dropdownn">
+                    <a href="/menu/{{node.id}}"><i class="fa fa-caret-down"> {{node.title}}</i></a>
+                    {% if not node.is_leaf_node %}
+                    <ul class="dropdownn-content">
+                        <li class="dropdownn">
+                            {{children}}
+                        </li>
+                    </ul>
+                    {%endif%}
+                </li>
+                {% endrecursetree%}
+                {%endif%}
+            </ul>
+        </div>
+        <!-- About Us Area Start -->
+        <div class="about-us-area section-padding-80-0 clearfix">
+            <div class="container">
+                <div  style="text-align:center;">
+                    <h2 style="color:red;">Aradığın sayfayı bulamadık... </h2><br>
+                </div>
+                <div  style="text-align:center;">
+                    <h5>Anasayfaya dönek için <a href="/" style="color:orange;">tıklayın</a></h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- About Us Area End -->
+
+
+{%endblock%}
+{%block follower%} {% include "follower.html"%} {%endblock%}
+
+

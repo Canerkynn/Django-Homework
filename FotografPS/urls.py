@@ -29,17 +29,24 @@ urlpatterns = [
     path('human/',include('Human.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('user/',include('user.urls')),
+    path('content/',include('content.urls')),
 
     path('hakkimizda/', views.hakkimizda, name='hakkimizda'),
     path('iletisim/', views.iletisim, name='iletisim'),
     path('referanslarimiz/', views.referanslarimiz, name='referanslarimiz'),
+    path('error/', views.error, name='error'),
+
     path('categories/<int:id>/<slug:slug>/',views.category_products,name='category_products'),
     path('product/<int:id>/<slug:slug>/',views.product_detail,name='product_detail'),
+    path('content/<int:id>/<slug:slug>/',views.content_detail,name='content_detail'),
+    path('menu/<int:id>',views.menu,name='menu'),
+
     path('search/',views.product_search,name='product_search'),
     path('search_auto/',views.product_search_auto,name='product_search_auto'),
     path('logout/', views.logout_view, name='logout_view'),
     path('login/', views.login_view, name='login_view'),
     path('signup/', views.signup_view, name='signup_view'),
+    path('sss/', views.faq, name='faq'),
 
 ]
 if settings.DEBUG:

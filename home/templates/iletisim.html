@@ -1,68 +1,68 @@
 {%extends "homebase.html" %}
 {%load static%}
 {%block title %}İletişim - {{setting.company}} {%endblock%}
-{%block description%} DESC {%endblock%}
-{%block keywords%} KEYWORDS {%endblock%}
+{%block description%} {{ setting.description }} {%endblock%}
+{%block keywords%} {{ setting.keywords }} {%endblock%}
 
 {% block head%} <link rel="shortcut icon" type="image/x-icon" href="{{setting.icon.url}}"/>{%endblock%}
 
 
 {%block galery%}
- <!-- Breadcrumb Area Start -->
-    <section class="breadcrumb-area bg-img bg-overlay jarallax mb-150 slider-1  ">
-        <div class="container h-100">
-            <div class="row h-100 align-items-center ">
-                <div class="col-12">
-                    <div class="breadcrumb-content text-center">
-                        <h2 class="page-title">İletişim</h2>
-                        <nav aria-label="breadcrumb">
-                            <ol class="breadcrumb justify-content-center">
-                                <li class="breadcrumb-item"><a href="index.html"><i class="icon_house_alt"></i> Anasayfa</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">İletişim</li>
-                            </ol>
-                        </nav>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Breadcrumb Area End -->
-       <!-- About Us Area Start -->
-    <div class="container section-padding-80-0 ">
-        <div class="row">
-            <div class ="alime-contact-form col-md-5  mr-50">
-
-                <div class="section-title mb-50">
-                    <h3 class="title">İletişim Formu </h3>
-                    <div style="width: 100%; height: 3px; background-color: orange; "></div>
-                </div>
-
-                {% if messages %}
-                    {% for message in messages %}
-                        <div class="alert alert-{{message.tags}}" role="alert">
-                            {{ message }}
-                        </div>
-                    {%endfor%}
-                {% endif %}
-
-                <form action="" method="post">
-                    {% csrf_token %} <!-- güvenlik tedbiri alır -->
-                    {{ form.as_p}} <!-- gösteme şekli -->
-                    <input type="submit" value="SEND FORM"> <!-- button -->
-                </form>
-
-            </div>
-
-            <div class ="col-md-6 ml-30">
-                <div class="about-us-area clearfix">
-                        <div class="row align-items-center">
-                            {{ setting.contact | safe}}
-                        </div>
+<!-- Breadcrumb Area Start -->
+<section class="breadcrumb-area bg-img bg-overlay jarallax mb-150 " style="background-image:url('{% static 'img/bg-img/iletisim.webp' %}')">
+    <div class="container h-100">
+        <div class="row h-100 align-items-center ">
+            <div class="col-12">
+                <div class="breadcrumb-content text-center">
+                    <h2 class="page-title">İletişim</h2>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center">
+                            <li class="breadcrumb-item"><a href="index.html"><i class="icon_house_alt"></i> Anasayfa</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">İletişim</li>
+                        </ol>
+                    </nav>
                 </div>
             </div>
         </div>
     </div>
-    <!-- About Us Area End -->
+</section>
+<!-- Breadcrumb Area End -->
+<!-- About Us Area Start -->
+<div class="container section-padding-80-0 ">
+    <div class="row">
+        <div class ="alime-contact-form col-md-5  mr-50">
+
+            <div class="section-title mb-50">
+                <h3 class="title">İletişim Formu </h3>
+                <div style="width: 100%; height: 3px; background-color: orange; "></div>
+            </div>
+
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-{{message.tags}}" role="alert">
+                {{ message }}
+            </div>
+        </div>
+        {%endfor%}
+        {% endif %}
+
+        <form action="" method="post">
+            {% csrf_token %} <!-- güvenlik tedbiri alır -->
+            {{ form.as_p}} <!-- gösteme şekli -->
+            <input type="submit" value="SEND FORM"> <!-- button -->
+        </form>
+
+    </div>
+
+    <div class ="col-md-6 ml-30">
+        <div class="about-us-area clearfix">
+            <div class="row align-items-center">
+                {{ setting.contact | safe}}
+            </div>
+        </div>
+    </div>
+</div>
+<!-- About Us Area End -->
 
 {%endblock%}
 {%block follower%} {% include "follower.html"%} {%endblock%}
